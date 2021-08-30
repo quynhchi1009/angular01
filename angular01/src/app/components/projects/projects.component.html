@@ -8,24 +8,51 @@
       <a mat-button href="https://www.google.com/" target="_blank">Link</a>
     </div>
 
-    <div class="example-label">Raised</div>
-    <div class="example-button-row">
-      <button mat-raised-button>Basic</button>
-      <button mat-raised-button color="primary">Primary</button>
-      <button mat-raised-button color="accent">Accent</button>
-      <button mat-raised-button color="warn">Warn</button>
-      <button mat-raised-button disabled>Disabled</button>
-      <a mat-raised-button href="https://www.google.com/" target="_blank">Link</a>
-    </div>
- 
-    <div class="example-label">Stroked</div>
-    <div class="example-button-row">
-      <button mat-stroked-button>Basic</button>
-      <button mat-stroked-button color="primary">Primary</button>
-      <button mat-stroked-button color="accent">Accent</button>
-      <button mat-stroked-button color="warn">Warn</button>
-      <button mat-stroked-button disabled>Disabled</button>
-      <a mat-stroked-button href="https://www.google.com/" target="_blank">Link</a>
-    </div>
+<br>
+<div>
+    <table>
+        <tr>
+            <th>
+                First Name
+            </th>
+            <th>
+                Last Name
+            </th>
+            <th>
+                Gender
+            </th>
+            <th>
+                Age
+            </th>
+            <th>
+                E-mail
+            </th>
+            <th>
+                Picture
+            </th>
+        </tr>
+        <tr *ngFor="let person of people">
+            <td>
+                {{person.name.first}}
+            </td>
+            <td>
+                {{person.name.last}}
+            </td>
+            <td>
+                {{person.gender === 'male' ? 'Nam' : 'Nu'}}
+            </td>
+            <td align="right">
+                {{person.dob.age}}
+            </td>
+            <td>
+                {{person.email}}
+            </td>
+            <td>
+                <img src="{{person.picture.thumbnail}}" 
+                alt="{{person.name.first}} + ' ' + {{person.name.last}} "/>
+            </td>
+        </tr>
+    </table>
+</div>
  
     
