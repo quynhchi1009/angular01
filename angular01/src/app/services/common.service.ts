@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient} from '@angular/common/http'
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +11,16 @@ export class CommonService {
     Pragma: 'no-cache',
   });
 
+  public userCount$ = new BehaviorSubject<number>(0);
+  public maleCount$ = new BehaviorSubject<number>(0);
+  public femaleCount$ = new BehaviorSubject<number>(0);
+
+
   constructor(private http:HttpClient) { }
 
   public getRandomPeople() {
-    return this.http.get<any>('https://randomuser.me/api/?results=10', {
+    const count = Math.floor(Math.random()* 15) +5;
+    return this.http.get<any>('https://randomuser.me/api/?results=' + count, {
       headers: this.headers
     })
   }

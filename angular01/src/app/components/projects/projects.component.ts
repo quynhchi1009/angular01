@@ -22,8 +22,19 @@ export class ProjectsComponent implements OnInit {
         // people.forEach((person: any) => {
         //   console.log('person', person.name.first)
         // });
+        this.common.userCount$.next(this.people.length);
+
+        const maleCount = this.people.filter((person: { gender: string; }) => person.gender === 'male').length;
+        this.common.femaleCount$.next(maleCount);
+        
+        this.common.maleCount$.next(this.people.length - maleCount);
+
       } 
     });
   }
 
 }
+function person(person: any) {
+  throw new Error('Function not implemented.');
+}
+
