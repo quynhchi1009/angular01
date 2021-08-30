@@ -8,6 +8,12 @@ import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 
+import {MatButtonModule } from '@angular/material/button'; 
+import {MatToolbarModule} from '@angular/material/toolbar'; 
+import {MatMenuModule} from '@angular/material/menu'; 
+import {MatIconModule} from '@angular/material/icon'; 
+import {MatCardModule} from '@angular/material/card'; 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +24,12 @@ import { ProjectsComponent } from './components/projects/projects.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatIconModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
