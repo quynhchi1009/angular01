@@ -14,6 +14,7 @@ export class ProjectsComponent implements OnInit {
   public countries = Array();
   results = [];
   public sortFirst = false;
+  public loading = true;
 
   constructor(private common: CommonService) { }
 
@@ -21,7 +22,10 @@ export class ProjectsComponent implements OnInit {
     if (this.common.people.length === 0) {
       this.loadData()
     } else {
-      this.people = this.common.people;
+      this.allPeople = this.common.people;
+      this.people = this.allPeople;
+      this.fillComboBox();
+      this.loading = false;
     }
   }
 
@@ -43,38 +47,50 @@ export class ProjectsComponent implements OnInit {
         // });
 
         this.common.userCount$.next(this.people.length);
-        const maleCount = this.people.filter((person: { gender: string; }) => person.gender === 'male').length;
-        this.common.femaleCount$.next(maleCount);
-        this.common.maleCount$.next(this.people.length - maleCount);
-        
-        let countries = Array();
-        this.people.forEach((person: { location: { country: any; }; }) => {
-          if (!countries.includes(person.location.country)) {
-            countries.push(person.location.country);
-          }
-        })
-        this.countries = Array();
-        countries = _.orderBy(countries);
-        countries.forEach(country => {
-          this.countries.push({
-            value: country, 
-            display: country});
-        })
+        const maleCount = this.people.filter((person: { gender: string; }) => 
+          person.gender === 'male').length;
+        this.common.maleCount$.next(maleCount);
+        this.common.femaleCount$.next(this.people.length - maleCount);
+        this.fillComboBox();
+        this.loading = false;   
       } 
     });
   }
 
+  fillComboBox() {
+    let countries = Array();
+    this.people.forEach((person: { location: { country: any; }; }) => {
+      if (!countries.includes(person.location.country)) {
+        countries.push(person.location.country);
+      }
+    })
+    this.countries = Array();
+    countries = _.orderBy(countries);
+    countries.forEach(country => {
+      this.countries.push({
+        value: country, 
+        display: country});
+    }) 
+    if (this.selectedCountry === '' && this.countries.length > 0) {
+      this.selectedCountry = this.countries[0].value;
+      this.onChange();
+    }
+  }
+
   public onChange() {
     console.log('Have chose', this.selectedCountry);
-    this.people = this.allPeople.filter(
-      (person: { location: { selectedCountry: string; }; }) => 
-      person.location.selectedCountry === this.selectedCountry
-    )
+    if (this.people) {
+      this.people = this.allPeople.filter(
+        (person: { location: { selectedCountry: string; }; }) => 
+        person.location.selectedCountry === this.selectedCountry
+      )
+    } else {
+      this.loadData();
+    }
   }
 
   public sort(columnName: any) {
     console.log("sorted");
-
     if (this.sortFirst) {
       this.people = _.orderBy(this.people, [columnName], ['asc'])
     } else {

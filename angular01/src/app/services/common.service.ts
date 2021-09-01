@@ -20,7 +20,7 @@ export class CommonService {
   constructor(private http:HttpClient) { }
 
   public getRandomPeople() {
-    const count = Math.floor(Math.random()* 20) +5;
+    const count = Math.floor(Math.random()* 100) +5;
     return this.http.get<any>('https://randomuser.me/api/?results=' + count, {
       headers: this.headers
     })

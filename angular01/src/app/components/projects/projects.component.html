@@ -24,31 +24,35 @@
             </mat-form-field>
         
     <br>
-    <div>
-        <table>
+
+    <div class="row">
+        <div *ngIf ="loading">
+            <span style="font-size: 200%">Loading...</span>
+        </div>
+        <table *ngIf="!loading">
             <tr style="background: wheat; color:blueviolet">
                 <th>
                     Avatar
                 </th>
                 <th>
                     <i 
-                        class="fas fa-sort-alpha-down-alt" 
+                        [ngClass] = "sortFirst
+                            ? 'fas fas fa-sort-alpha-up'
+                            : 'fas fas fa-sort-alpha-down' "
                         aria-hidden="true" 
                         (click)="sort('name.first')"    
                         style="cursor: pointer;"
-                        title="Click to sort"
-                        *ngIf ="!sortFirst"
-                    >
+                        title="Click to sort">
                     </i>
-                    <i 
+                    <!-- <i 
                     class="fas fas fa-sort-alpha-up" 
                     aria-hidden="true" 
                     (click)="sort('name.first')"    
                     style="cursor: pointer;"
                     title="Click to sort"
                     *ngIf ="sortFirst"
-                    >
-                </i>
+                    > 
+                </i> -->
                     First Name
                 </th>
                 <th>
@@ -86,7 +90,7 @@
                     </div>
                 </td>
                 <td>
-                    {{person.name.first}}
+                    {{person.name.first}} 
                 </td>
                 <td>
                     {{person.name.last}}
