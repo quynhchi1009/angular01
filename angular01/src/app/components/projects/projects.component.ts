@@ -57,7 +57,7 @@ export class ProjectsComponent implements OnInit {
     });
   }
 
-  fillComboBox() {
+  public fillComboBox() {
     let countries = Array();
     this.people.forEach((person: { location: { country: any; }; }) => {
       if (!countries.includes(person.location.country)) {
@@ -67,10 +67,13 @@ export class ProjectsComponent implements OnInit {
     this.countries = Array();
     countries = _.orderBy(countries);
     countries.forEach(country => {
+      const count = this.people.filter((person: { location: { country: any; }; }) => 
+      person.location.country === country).length;
       this.countries.push({
         value: country, 
-        display: country});
+        display: country + `(${count})`});
     }) 
+    //Neu chua chon gi thi mac dinh la gia tri dau tien
     if (this.selectedCountry === '' && this.countries.length > 0) {
       this.selectedCountry = this.countries[0].value;
       this.onChange();
