@@ -28,6 +28,9 @@
         <table>
             <tr style="background: wheat; color:blueviolet">
                 <th>
+                    Avatar
+                </th>
+                <th>
                     <i 
                         class="fas fa-sort-alpha-down-alt" 
                         aria-hidden="true" 
@@ -74,7 +77,14 @@
                     Picture
                 </th>
             </tr>
-            <tr *ngFor="let person of people">
+            <tr *ngFor = "let person of people">
+                <td align = "center">
+                    <div mat-card-avatar 
+                        class="example-header-image" 
+                        [style.background] = "'url(' + person.picture.thumbnail + ')'"
+                        title = "{{person.name.first}} + ' ' + {{person.name.last}}">
+                    </div>
+                </td>
                 <td>
                     {{person.name.first}}
                 </td>
@@ -95,7 +105,7 @@
                 </td>
                 <td>
                     <img src="{{person.picture.thumbnail}}" 
-                    alt="{{person.name.first}} + ' ' + {{person.name.last}} "/>
+                    title="{{person.name.first}} + ' ' + {{person.name.last}} "/>
                 </td>
             </tr>
         </table>
