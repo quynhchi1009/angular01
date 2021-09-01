@@ -10,6 +10,10 @@ import { ProjectsComponent } from './components/projects/projects.component';
 
 import { HttpClientModule } from '@angular/common/http';
 
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+
+
 import {MatButtonModule } from '@angular/material/button'; 
 import {MatToolbarModule} from '@angular/material/toolbar'; 
 import {MatMenuModule} from '@angular/material/menu'; 
@@ -17,6 +21,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card'; 
 import {MatChipsModule} from '@angular/material/chips'; 
 import {MatBadgeModule} from '@angular/material/badge'; 
+import {MatSelectModule} from '@angular/material/select'; 
 
 @NgModule({
   declarations: [
@@ -36,7 +41,10 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatCardModule,
     HttpClientModule,
     MatChipsModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatSelectModule,
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,58 +1,117 @@
+<div style="margin: 50px">
     <div class="example-label">Basic</div>
     <div class="example-button-row">
-      <button mat-button style="background-color: aqua;">Basic</button>
-      <button mat-button color="primary" class="test">Primary</button>
-      <button mat-button color="accent">Accent</button>
-      <button mat-button color="warn">Warn</button>
-      <button mat-button disabled>Disabled</button>
-      <a mat-button href="https://www.google.com/" target="_blank">Link</a>
+        <button mat-button style="background-color: aqua;">Basic</button>
+        <button mat-button color="primary" class="test">Primary</button>
+        <button mat-button color="accent">Accent</button>
+        <button mat-button color="warn">Warn</button>
+        <button mat-button disabled>Disabled</button>
+        <a mat-button href="https://www.google.com/" target="_blank">Link</a>
     </div>
 
-<br>
-<div>
-    <table>
-        <tr>
-            <th>
-                First Name
-            </th>
-            <th>
-                Last Name
-            </th>
-            <th>
-                Gender
-            </th>
-            <th>
-                Age
-            </th>
-            <th>
-                E-mail
-            </th>
-            <th>
-                Picture
-            </th>
-        </tr>
-        <tr *ngFor="let person of people">
-            <td>
-                {{person.name.first}}
-            </td>
-            <td>
-                {{person.name.last}}
-            </td>
-            <td>
-                {{person.gender === 'male' ? 'Nam' : 'Nu'}}
-            </td>
-            <td align="right">
-                {{person.dob.age}}
-            </td>
-            <td>
-                {{person.email}}
-            </td>
-            <td>
-                <img src="{{person.picture.thumbnail}}" 
-                alt="{{person.name.first}} + ' ' + {{person.name.last}} "/>
-            </td>
-        </tr>
-    </table>
+        <br>
+        <h4>Basic mat-select</h4>
+            <mat-form-field appearance="fill">
+            <!-- <mat-label>Country</mat-label> -->
+            <mat-select 
+                placeholder = "Country" 
+                [(ngModel)]="selectedCountry"
+                (ngModelOnchange)="onChange()">
+                <mat-option *ngFor="let country of countries" [value]="country.value">
+                    {{ country.display }}
+                </mat-option>
+            </mat-select>
+            </mat-form-field>
+        
+    <br>
+    <div>
+        <table>
+            <tr style="background: wheat; color:blueviolet">
+                <th>
+                    <i 
+                        class="fas fa-sort-alpha-down-alt" 
+                        aria-hidden="true" 
+                        (click)="sort('name.first')"    
+                        style="cursor: pointer;"
+                        title="Click to sort"
+                        *ngIf ="!sortFirst"
+                    >
+                    </i>
+                    <i 
+                    class="fas fas fa-sort-alpha-up" 
+                    aria-hidden="true" 
+                    (click)="sort('name.first')"    
+                    style="cursor: pointer;"
+                    title="Click to sort"
+                    *ngIf ="sortFirst"
+                    >
+                </i>
+                    First Name
+                </th>
+                <th>
+                    Last Name
+                </th>
+                <th>
+                    <i 
+                        class="fas fa-sort-alpha-up" 
+                        aria-hidden="true" 
+                        (click)="sort('gender')"    
+                        style="cursor: pointer;"
+                        title="Click to sort">
+                    </i>
+                    Gender
+                </th>
+                <th>
+                    Country
+                </th>
+                <th>
+                    Age
+                </th>
+                <th>
+                    E-mail
+                </th>
+                <th>
+                    Picture
+                </th>
+            </tr>
+            <tr *ngFor="let person of people">
+                <td>
+                    {{person.name.first}}
+                </td>
+                <td>
+                    {{person.name.last}}
+                </td>
+                <td>
+                    {{person.gender === 'male' ? 'Nam' : 'Nu'}}
+                </td>
+                <td>
+                    {{person.location.country}}
+                </td>
+                <td align="right">
+                    {{person.dob.age}}
+                </td>
+                <td>
+                    {{person.email}}
+                </td>
+                <td>
+                    <img src="{{person.picture.thumbnail}}" 
+                    alt="{{person.name.first}} + ' ' + {{person.name.last}} "/>
+                </td>
+            </tr>
+        </table>
+        <br>
+        <div>
+            <p>
+                Copyright Notice: https://randomuser.me/copyright
+                <br>
+                All randomly generated photos were hand picked from the authorized section of 
+                <a href = "https://uifaces.com">UI Faces</a>. Please visit 
+                <a href = "https://web.archive.org/web/20160811185628/http://uifaces.com/faq">
+                UI Faces FAQ</a> 
+                for more information regarding how you can use these faces.
+            </p>
+        </div>
+    </div>
 </div>
  
     
